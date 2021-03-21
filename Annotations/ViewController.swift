@@ -9,18 +9,47 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var keyAnnotationText: String = "annotation"
+    let keyAnnotationText: String = "annotation"
+    let saveAlertTitle: String = "Salvar"
+    let saveAlertMessage: String = "Você realmente deseja salvar a anotação?"
+    let deleteAlertTitle: String = "Excluir"
+    let deleteAlertMessage: String = "Você realmente deseja excluir a anotação?"
+    let confirmAlertActionTitle: String = "Confirmar"
+    let deleteAlertActionTitle: String = "Excluir"
+    let cancelAlertActionTitle: String = "Cancelar"
+    
+    
     @IBOutlet weak var annotationTextView: UITextView!
     @IBAction func saveAnnotationButton(_ sender: UIButton) {
-        saveAnnotation()
-        view.endEditing(true)
-    }
-    @IBAction func deleteAnnotationButton(_ sender: UIButton) {
-        deleteAnnotation()
+        
+        present(makeAlertController(of: "save"), animated: true, completion: nil)
         view.endEditing(true)
     }
     
-    func saveAnnotation() {
+    func makeAlertController(of type: String?) -> UIAlertController {
+        if(type == "save"){
+            let alert = UIAlertController(title: saveAlertTitle, message: saveAlertMessage, preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: confirmAlertActionTitle, style: .default, handler: saveAnnotation(_:))
+            let cancelAction = UIAlertAction(title: cancelAlertActionTitle, style: .cancel, handler: nil)
+            alert.addAction(confirmAction)
+            alert.addAction(cancelAction)
+            return alert
+        } else {
+            let alert = UIAlertController(title: deleteAlertTitle, message: deleteAlertMessage, preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: deleteAlertActionTitle, style: .destructive, handler: deleteAnnotation(_:))
+            let cancelAction = UIAlertAction(title: cancelAlertActionTitle, style: .cancel, handler: nil)
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            return alert
+        }
+    }
+    
+    @IBAction func deleteAnnotationButton(_ sender: UIButton) {
+        present(makeAlertController(of: "delete"), animated: true, completion: nil)
+        view.endEditing(true)
+    }
+    
+    func saveAnnotation(_ alertAction: UIAlertAction) {
         UserDefaults.standard.set(annotationTextView.text, forKey: keyAnnotationText)
     }
     
@@ -31,7 +60,7 @@ class ViewController: UIViewController {
         return ""
     }
     
-    func deleteAnnotation() {
+    func deleteAnnotation(_ alertAction: UIAlertAction) {
         UserDefaults.standard.removeObject(forKey: keyAnnotationText)
         updateAnnotationTextView()
     }
