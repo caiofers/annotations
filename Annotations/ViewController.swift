@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var annotationTextView: UITextView!
     @IBAction func saveAnnotationButton(_ sender: UIButton) {
         UserDefaults.standard.set(annotationTextView.text, forKey: keyAnnotationText)
+        view.endEditing(true)
     }
     
     func getAnnotation() -> String{
@@ -27,7 +28,10 @@ class ViewController: UIViewController {
         annotationTextView.text = getAnnotation()
         //UserDefaults.standard.removeObject(forKey: "teste")
     }
-
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 
 }
 
