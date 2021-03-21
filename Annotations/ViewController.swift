@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let keyAnnotationText: String = "annotation"
+    
     let saveAlertTitle: String = "Salvar"
     let saveAlertMessage: String = "Você realmente deseja salvar a anotação?"
     let deleteAlertTitle: String = "Excluir"
@@ -21,32 +22,67 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var annotationTextView: UITextView!
     @IBAction func saveAnnotationButton(_ sender: UIButton) {
-        
         present(makeAlertController(of: "save"), animated: true, completion: nil)
         view.endEditing(true)
-    }
-    
-    func makeAlertController(of type: String?) -> UIAlertController {
-        if(type == "save"){
-            let alert = UIAlertController(title: saveAlertTitle, message: saveAlertMessage, preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: confirmAlertActionTitle, style: .default, handler: saveAnnotation(_:))
-            let cancelAction = UIAlertAction(title: cancelAlertActionTitle, style: .cancel, handler: nil)
-            alert.addAction(confirmAction)
-            alert.addAction(cancelAction)
-            return alert
-        } else {
-            let alert = UIAlertController(title: deleteAlertTitle, message: deleteAlertMessage, preferredStyle: .alert)
-            let deleteAction = UIAlertAction(title: deleteAlertActionTitle, style: .destructive, handler: deleteAnnotation(_:))
-            let cancelAction = UIAlertAction(title: cancelAlertActionTitle, style: .cancel, handler: nil)
-            alert.addAction(deleteAction)
-            alert.addAction(cancelAction)
-            return alert
-        }
     }
     
     @IBAction func deleteAnnotationButton(_ sender: UIButton) {
         present(makeAlertController(of: "delete"), animated: true, completion: nil)
         view.endEditing(true)
+    }
+    
+    func makeAlertController(of type: String?) -> UIAlertController {
+        
+        var alertTitle: String
+        var alertMessage: String
+        
+        var primaryActionTitle: String
+        var primaryActionHander: ((UIAlertAction) -> Void)?
+        var isPrimaryActionDestructive: Bool
+        
+        var secondaryActionTitle: String
+        var secondaryActionHander: ((UIAlertAction) -> Void)?
+        var isSecondaryActionDestructive: Bool
+        
+        var isPrimaryPreferredAction: Bool
+        
+        if(type == "save"){
+            alertTitle = self.saveAlertTitle
+            alertMessage = self.saveAlertMessage
+            
+            primaryActionTitle = self.confirmAlertActionTitle
+            primaryActionHander = saveAnnotation
+            isPrimaryActionDestructive = false
+            
+            secondaryActionTitle = self.cancelAlertActionTitle
+            secondaryActionHander = nil
+            isSecondaryActionDestructive = false
+            
+            isPrimaryPreferredAction = true
+            
+        } else {
+            alertTitle = self.deleteAlertTitle
+            alertMessage = self.deleteAlertMessage
+            
+            primaryActionTitle = self.deleteAlertActionTitle
+            primaryActionHander = deleteAnnotation
+            isPrimaryActionDestructive = true
+            
+            secondaryActionTitle = self.cancelAlertActionTitle
+            secondaryActionHander = nil
+            isSecondaryActionDestructive = false
+            
+            isPrimaryPreferredAction = false
+        }
+        
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let primaryAction = UIAlertAction(title: primaryActionTitle, style: isPrimaryActionDestructive ? .destructive : .default, handler: primaryActionHander)
+        let secondaryAction = UIAlertAction(title: secondaryActionTitle, style: isSecondaryActionDestructive ? .destructive : .cancel, handler: secondaryActionHander)
+        alert.addAction(primaryAction)
+        alert.addAction(secondaryAction)
+        alert.preferredAction = isPrimaryPreferredAction ? primaryAction : secondaryAction
+        return alert
     }
     
     func saveAnnotation(_ alertAction: UIAlertAction) {
