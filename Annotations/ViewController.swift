@@ -12,8 +12,16 @@ class ViewController: UIViewController {
     var keyAnnotationText: String = "annotation"
     @IBOutlet weak var annotationTextView: UITextView!
     @IBAction func saveAnnotationButton(_ sender: UIButton) {
-        UserDefaults.standard.set(annotationTextView.text, forKey: keyAnnotationText)
+        saveAnnotation()
         view.endEditing(true)
+    }
+    @IBAction func deleteAnnotationButton(_ sender: UIButton) {
+        deleteAnnotation()
+        view.endEditing(true)
+    }
+    
+    func saveAnnotation() {
+        UserDefaults.standard.set(annotationTextView.text, forKey: keyAnnotationText)
     }
     
     func getAnnotation() -> String {
