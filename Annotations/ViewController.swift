@@ -16,17 +16,25 @@ class ViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func getAnnotation() -> String{
+    func getAnnotation() -> String {
         if let text = UserDefaults.standard.object(forKey: keyAnnotationText){
             return text as! String
         }
         return ""
     }
     
+    func deleteAnnotation() {
+        UserDefaults.standard.removeObject(forKey: keyAnnotationText)
+        updateAnnotationTextView()
+    }
+    
+    func updateAnnotationTextView(){
+        annotationTextView.text = getAnnotation()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        annotationTextView.text = getAnnotation()
-        //UserDefaults.standard.removeObject(forKey: "teste")
+        updateAnnotationTextView()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
