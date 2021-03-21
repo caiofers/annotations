@@ -1,24 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ksh-ju-ZC6">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Annotations-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Annotations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo" translatesAutoresizingMaskIntoConstraints="NO" id="Mj2-JW-Ldi">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Kgd-wt-XBH">
+                                <rect key="frame" x="40" y="40" width="334" height="368"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Qqb-o0-qNw">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="310"/>
+                                        <color key="backgroundColor" red="0.99601203199999999" green="0.98949223760000005" blue="0.83172595500000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <color key="textColor" red="0.25590413810000001" green="0.20387846230000001" blue="0.18053552510000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wY2-eW-0LW">
+                                        <rect key="frame" x="0.0" y="330" width="334" height="38"/>
+                                        <state key="normal" image="botao_salvar"/>
+                                        <connections>
+                                            <action selector="saveAnnotationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iWo-7B-nfi"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="wY2-eW-0LW" secondAttribute="trailing" id="4BR-JL-l2G"/>
+                                    <constraint firstItem="Qqb-o0-qNw" firstAttribute="top" secondItem="Kgd-wt-XBH" secondAttribute="top" id="4Th-67-W4x"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qqb-o0-qNw" secondAttribute="trailing" id="BP1-B6-ooH"/>
+                                    <constraint firstItem="wY2-eW-0LW" firstAttribute="leading" secondItem="Kgd-wt-XBH" secondAttribute="leading" id="Dy0-Sb-nfZ"/>
+                                    <constraint firstItem="Qqb-o0-qNw" firstAttribute="leading" secondItem="Kgd-wt-XBH" secondAttribute="leading" id="mKl-c5-bO9"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Mj2-JW-Ldi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="72M-9x-GsI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kgd-wt-XBH" secondAttribute="trailing" constant="40" id="8Go-tx-gXl"/>
+                            <constraint firstItem="Mj2-JW-Ldi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9ty-EG-Agl"/>
+                            <constraint firstItem="Kgd-wt-XBH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="GKu-DZ-Epe"/>
+                            <constraint firstAttribute="bottom" secondItem="Mj2-JW-Ldi" secondAttribute="bottom" id="K3m-YO-cFx"/>
+                            <constraint firstAttribute="trailing" secondItem="Mj2-JW-Ldi" secondAttribute="trailing" id="WwK-Fd-0gJ"/>
+                            <constraint firstItem="Kgd-wt-XBH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="qc4-O1-VGf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Kgd-wt-XBH" secondAttribute="bottom" constant="366" id="zWU-DQ-1Sf"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Annotations" id="2tl-JI-GGc"/>
+                    <connections>
+                        <outlet property="annotationTextView" destination="Qqb-o0-qNw" id="x5i-Bw-0Mm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="928.98550724637687" y="93.75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VE9-ZL-2Nl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ksh-ju-ZC6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mz7-DA-icR">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.25590413810000001" green="0.20387846230000001" blue="0.18053552510000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="UUK-ix-K15"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QlE-wE-sqC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.840579710144929" y="93.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="botao_salvar" width="321" height="38"/>
+        <image name="fundo" width="768" height="462"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

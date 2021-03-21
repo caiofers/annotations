@@ -9,11 +9,22 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var keyAnnotationText: String = "annotation"
+    @IBOutlet weak var annotationTextView: UITextView!
+    @IBAction func saveAnnotationButton(_ sender: UIButton) {
+        UserDefaults.standard.set(annotationTextView.text, forKey: keyAnnotationText)
+    }
+    
+    func getAnnotation() -> String{
+        if let text = UserDefaults.standard.object(forKey: keyAnnotationText){
+            return text as! String
+        }
+        return ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //UserDefaults.standard.set("testando", forKey: "teste")
-        //let text = UserDefaults.standard.object(forKey: "teste")
-        //print(text)
+        annotationTextView.text = getAnnotation()
         //UserDefaults.standard.removeObject(forKey: "teste")
     }
 
